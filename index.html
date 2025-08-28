@@ -6,40 +6,52 @@
     <title>Güzel Bir Sürpriz</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ffeaa7);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #333;
+            color: #2d3436;
             text-align: center;
+            overflow: hidden;
         }
         .container {
-            max-width: 600px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #e84393;
+        }
+        p {
+            font-size: 1.3em;
+            margin-bottom: 25px;
         }
         button {
-            background-color: #ff758c;
+            background-color: #ff7675;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 15px 40px;
             font-size: 1.2em;
             border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: all 0.3s ease;
         }
         button:hover {
-            background-color: #ff9a9e;
-            transform: scale(1.05);
+            background-color: #d63031;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         #video-container {
             display: none;
@@ -47,46 +59,58 @@
         }
         video {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transform: scaleX(-1); /* Kamerayı ters çevirir */
         }
-        #message {
-            font-size: 1.2em;
-            margin-bottom: 30px;
+        .error {
+            color: #d63031;
+            font-size: 1.1em;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Hoş Geldin!</h1>
-        <p id="message">Kendinden daha güzel birini görmek istiyorsan, aşağıdaki butona tıkla. 😊</p>
-        <button onclick="showCamera()">Tıkla ve Gör!</button>
+        <h1>Merhaba!</h1>
+        <p id="message">Kendinden daha güzel birini görmek için aşağıdaki butona tıkla! 😊</p>
+        <button onclick="startCamera()">Hadi, Tıkla!</button>
         <div id="video-container">
             <video id="video" autoplay playsinline></video>
         </div>
+        <p id="error" class="error"></p>
     </div>
 
     <script>
-        function showCamera() {
+        async function startCamera() {
             const video = document.getElementById('video');
             const message = document.getElementById('message');
+            const error = document.getElementById('error');
             const button = document.querySelector('button');
+            const header = document.querySelector('h1');
 
             // Mesajı ve butonu gizle, video alanını göster
             message.style.display = 'none';
             button.style.display = 'none';
-            document.querySelector('h1').innerText = 'İşte O Güzel İnsan! 😍';
+            header.innerText = 'İşte Dünyanın En Güzel İnsanı! 😍';
             document.getElementById('video-container').style.display = 'block';
 
-            // Kamera erişimi iste
-            navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: 'user' } // Ön kamera
-            })
-            .then(stream => {
+            try {
+                // Kamera erişimi iste
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'user' } // Ön kamera
+                });
                 video.srcObject = stream;
-            })
-            .catch(error => {
-                console.error('Kamera erişim hatası:', error);
-                alert
+            } catch (err) {
+                console.error('Kamera hatası:', err);
+                error.innerText = 'Kamera açılamadı! Lütfen tarayıcından kamera iznini kontrol et veya başka bir cihaz dene.';
+                header.innerText = 'Olamaz, bir sorun var! 😕';
+                document.getElementById('video-container').style.display = 'none';
+                button.style.display = 'block';
+                button.innerText = 'Tekrar Dene';
+            }
+        }
+    </script>
+</body>
+</html>
