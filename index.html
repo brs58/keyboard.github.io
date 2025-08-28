@@ -1,99 +1,96 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
- 
-    <link rel="stylesheet" href="style.css">
-
+    <title>Güzel Bir Sürpriz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #ff758c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #ff9a9e;
+            transform: scale(1.05);
+        }
+        #video-container {
+            display: none;
+            margin-top: 20px;
+        }
+        video {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        #message {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Hoş Geldin!</h1>
+        <p id="message">Kendinden daha güzel birini görmek istiyorsan, aşağıdaki butona tıkla. 😊</p>
+        <button onclick="showCamera()">Tıkla ve Gör!</button>
+        <div id="video-container">
+            <video id="video" autoplay playsinline></video>
+        </div>
+    </div>
 
+    <script>
+        function showCamera() {
+            const video = document.getElementById('video');
+            const message = document.getElementById('message');
+            const button = document.querySelector('button');
 
-<div class="case">
-  <!-- First row -->
-  <div class="key" data-key="escape">esc</div>
-  <div class="key" data-key="1"></div>
-  <div class="key" data-key="2"></div>
-  <div class="key" data-key="3"></div>
-  <div class="key" data-key="4"></div>
-  <div class="key" data-key="5"></div>
-  <div class="key" data-key="6"></div>
-  <div class="key" data-key="7"></div>
-  <div class="key" data-key="8"></div>
-  <div class="key" data-key="9"></div>
-  <div class="key" data-key="0"></div>
-  <div class="key" data-key="-"></div>
-  <div class="key" data-key="="></div>
-  <div class="key xxl" data-key="backspace"></div>
-  <div class="key" data-key="help">ins</div>
-  <div class="key" data-key="home"></div>
-  <!-- Second row -->
-  <div class="key large" data-key="tab"></div>
-  <div class="key" data-key="q"></div>
-  <div class="key" data-key="w"></div>
-  <div class="key" data-key="e"></div>
-  <div class="key" data-key="r"></div>
-  <div class="key" data-key="t"></div>
-  <div class="key" data-key="y"></div>
-  <div class="key" data-key="u"></div>
-  <div class="key" data-key="i"></div>
-  <div class="key" data-key="o"></div>
-  <div class="key" data-key="p"></div>
-  <div class="key" data-key="["></div>
-  <div class="key" data-key="]"></div>
-  <div class="key large" data-key="\"></div>
-  <div class="key" data-key="delete">del</div>
-  <div class="key" data-key="end"></div>
-  <!-- Third row -->
-  <div class="key xl" data-key="capslock">caps</div>
-  <div class="key" data-key="a"></div>
-  <div class="key" data-key="s"></div>
-  <div class="key" data-key="d"></div>
-  <div class="key" data-key="f"></div>
-  <div class="key" data-key="g"></div>
-  <div class="key" data-key="h"></div>
-  <div class="key" data-key="j"></div>
-  <div class="key" data-key="k"></div>
-  <div class="key" data-key="l"></div>
-  <div class="key" data-key=";"></div>
-  <div class="key" data-key="'"></div>
-  <div class="key xl" data-key="enter">return</div>
-  <div class="key" data-key="f15">pause</div>
-  <div class="key" data-key="pageup">pg up</div>
-  <!-- Fourth row -->
-  <div class="key xxl" data-key="shiftleft">shift</div>
-  <div class="key" data-key="z"></div>
-  <div class="key" data-key="x"></div>
-  <div class="key" data-key="c"></div>
-  <div class="key" data-key="v"></div>
-  <div class="key" data-key="b"></div>
-  <div class="key" data-key="n"></div>
-  <div class="key" data-key="m"></div>
-  <div class="key" data-key=","></div>
-  <div class="key" data-key="."></div>
-  <div class="key" data-key="/"></div>
-  <div class="key xxl" data-key="shiftright">shift</div>
-  <div class="key" data-key="arrowup">▲</div>
-  <div class="key" data-key="pagedown">pg dn</div>
-  <!-- Fifth row -->
-  <div class="key medium" data-key="controlleft">ctrl</div>
-  <div class="key medium" data-key="meta">win</div>
-  <div class="key medium" data-key="altleft">alt</div>
-  <div class="key huge" data-key=" "></div>
-  <div class="key medium" data-key="altright">alt</div>
-  <div class="key medium" data-key="fn"></div>
-  <div class="key medium" data-key="controlright">ctrl</div>
-  <div class="key" data-key="arrowleft">◀</div>
-  <div class="key" data-key="arrowdown">▼</div>
-  <div class="key" data-key="arrowright">▶</div>
-</div>
+            // Mesajı ve butonu gizle, video alanını göster
+            message.style.display = 'none';
+            button.style.display = 'none';
+            document.querySelector('h1').innerText = 'İşte O Güzel İnsan!';
+            document.getElementById('video-container').style.display = 'block';
 
-<script src="script.js"></script>
-
+            // Kamera erişimi iste
+            navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: 'user' } // Ön kamera
+            })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Kamera erişim hatası:', error);
+                alert('Kamera erişimine izin ver lütfen! Tarayıcından kamera iznini kontrol et.');
+            });
+        }
+    </script>
 </body>
 </html>
