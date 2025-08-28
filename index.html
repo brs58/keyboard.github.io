@@ -50,6 +50,7 @@
             max-width: 500px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: scaleX(-1); /* Kamerayı ters çevirir */
         }
         #message {
             font-size: 1.2em;
@@ -76,7 +77,7 @@
             // Mesajı ve butonu gizle, video alanını göster
             message.style.display = 'none';
             button.style.display = 'none';
-            document.querySelector('h1').innerText = 'İşte O Güzel İnsan!';
+            document.querySelector('h1').innerText = 'İşte O Güzel İnsan! 😍';
             document.getElementById('video-container').style.display = 'block';
 
             // Kamera erişimi iste
@@ -88,9 +89,4 @@
             })
             .catch(error => {
                 console.error('Kamera erişim hatası:', error);
-                alert('Kamera erişimine izin ver lütfen! Tarayıcından kamera iznini kontrol et.');
-            });
-        }
-    </script>
-</body>
-</html>
+                alert
